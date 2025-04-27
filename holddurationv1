@@ -1,0 +1,48 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local proximityPromptService = game:GetService("ProximityPromptService")
+
+-- Function to set up ProximityPrompts
+local function setupProximityPrompt(prompt)
+	if prompt:IsA("ProximityPrompt") then
+		-- Set HoldDuration to 0 when it's enabled (i.e., when you get close)
+		prompt:GetPropertyChangedSignal("Enabled"):Connect(function()
+			if prompt.Enabled then
+				prompt.HoldDuration = 0
+			end
+		end)
+
+		-- Ensure it's already set if enabled
+		if prompt.Enabled then
+			prompt.HoldDuration = 0
+		end
+	end
+end
+
+-- Check proximity to ProximityPrompts
+local function checkProximity()
+	while true do
+		local closestPrompt = nil
+		local closestDistance = math.huge
+
+		for _, descendant in ipairs(workspace:GetDescendants()) do
+			if descendant:IsA("ProximityPrompt") and descendant.Enabled then
+				local distance = (character.HumanoidRootPart.Position - descendant.Parent.Position).magnitude
+				if distance < closestDistance then
+					closestDistance = distance
+					closestPrompt = descendant
+				end
+			end
+		end
+
+		if closestPrompt and closestDistance < 10 then -- Adjust the distance threshold as needed
+			setupProximityPrompt(closestPrompt)
+		end
+
+		wait(0.5) -- Check every 0.5 seconds for nearby prompts
+	end
+end
+
+-- Start checking for proximity prompts when the character is added or respawned
+character:WaitForChild("HumanoidRootPart")
+checkProximity()
