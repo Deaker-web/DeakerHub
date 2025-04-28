@@ -16,12 +16,12 @@ local Lock = false
 local Epitaph = .187 ---Note: The Bigger The Number, The More Prediction.
 local HeadOffset = Vector3.new(0, .1, 0)
 
-_G.TeamCheck = false
+_G.TeamCheck = true
 _G.AimPart = "Head"
 _G.Sensitivity = 0
 _G.CircleSides = 64
 _G.CircleColor = Color3.fromRGB(255, 0, 130)
-_G.CircleTransparency = 0
+_G.CircleTransparency = 0.5
 _G.CircleRadius = 200
 _G.CircleFilled = false
 _G.CircleVisible = true
