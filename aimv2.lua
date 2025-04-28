@@ -17,7 +17,7 @@ local Epitaph = .187 ---Note: The Bigger The Number, The More Prediction.
 local HeadOffset = Vector3.new(0, .1, 0)
 
 _G.TeamCheck = false
-_G.AimPart = "HumanoidRootPart"
+_G.AimPart = "Head"
 _G.Sensitivity = 0
 _G.CircleSides = 64
 _G.CircleColor = Color3.fromRGB(255, 0, 130)
