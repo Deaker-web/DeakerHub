@@ -10,7 +10,7 @@ local Settings = {
     Tracers = true
 }
 local Team_Check = {
-    TeamCheck = false, -- if TeamColor is on this won't matter...
+    TeamCheck = true, -- if TeamColor is on this won't matter...
     Green = Color3.fromRGB(0, 255, 0),
     Red = Color3.fromRGB(255, 0, 0)
 }
